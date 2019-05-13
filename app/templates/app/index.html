@@ -1,0 +1,100 @@
+{% extends "app/base.html" %}
+{% load staticfiles %}
+
+{% block title %}recetas{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="busqueda">
+                <div class="form">
+                    <form action="/" method="post">
+                        <div class="form-group">
+                            {{ form }}
+                            <input type="image" src="{% static "images/iu.png" %}" alt="Submit Form"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if resultado %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    resultados: {{ cantidad }}
+                </h2>
+            </div>
+        </div>
+        {% if "recetas" in resultado %}
+            <div class="row">
+                <h4>recetas</h4>
+            </div>
+            {% for gruporec in resultado.recetas|group_by:4 %}
+                <div class="row">
+                    {% for rec in gruporec %}
+                        <div class="col-md-3 ">
+                            <div class="receta">
+                                <a href="/receta/id/{{ rec.0 }}">
+                                    <p class="nombre">{{ rec.1 }}</p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if "insumos" in resultado %}
+            {% if resultado.insumos|length %}
+                <div class="row">
+                    <h4>insumos</h4>
+                </div>
+                {% for grupoins in resultado.insumos|group_by:4 %}
+                    <div class="row">
+                        {% for rec in grupoins %}
+                            <div class="col-md-3 ">
+                                <div class="insumo">
+                                    <a href="/insumo/{{ rec.0 }}">
+                                        <p class="nombre">{{ rec.1 }}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        {% if "categorias" in resultado %}
+            {% if resultado.categorias|length %}
+                <div class="row">
+                    <h4>categorias</h4>
+                </div>
+                {% for grupocat in resultado.categorias|group_by:4 %}
+                    <div class="row">
+                        {% for rec in grupocat %}
+                            <div class="col-md-3">
+                                <div class="categoria">
+                                    <a href="/categoria/{{ rec.0 }}">
+                                        <p class="nombre">{{ rec.1 }}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{{ texto }}</h2>
+            <ul>
+                {% for receta in recetas %}
+                    <li>
+                        <a href="/receta/{{ receta.handle }}">{{ receta.nombre }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

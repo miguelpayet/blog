@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+{% load mi_markdown %}
+
+{% block title %}blog{% endblock %}
+
+{% block content %}
+    <div class="contenido">
+        <h1>{{ entry.titulo }}</h1>
+        <p>
+            {{ entry.descripcion | mi_markdown }}
+        </p>
+    </div>
+{% endblock %}
+
+{% block pie %}
+    {% if anterior %}
+        <p>anterior: <a href="/blog/{{ anterior.handle }}">{{ anterior.titulo }}</a></p>
+    {% endif %}
+    {% if siguiente %}
+        <p>siguiente: <a href="/blog/{{ siguiente.handle }}">{{ siguiente.titulo }}</a></p>
+    {% endif %}
+    <div class="fecha">
+        <p>
+            entrada {{ entry.id }} - creado {{ entry.creado }} - modificado {{ entry.cambiado }}
+        </p>
+    </div>
+{% endblock %}
