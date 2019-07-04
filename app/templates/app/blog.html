@@ -14,10 +14,10 @@
 
 {% block pie %}
     {% if anterior %}
-        <p>anterior: <a href="/blog/{{ anterior.handle }}">{{ anterior.titulo }}</a></p>
+        <p>anterior: <a href="/{{ anterior.handle }}">{{ anterior.titulo }}</a></p>
     {% endif %}
     {% if siguiente %}
-        <p>siguiente: <a href="/blog/{{ siguiente.handle }}">{{ siguiente.titulo }}</a></p>
+        <p>siguiente: <a href="/{{ siguiente.handle }}">{{ siguiente.titulo }}</a></p>
     {% endif %}
     <div class="fecha">
         <p>
