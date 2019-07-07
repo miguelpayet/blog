@@ -4,10 +4,26 @@
 {% block title %}blog{% endblock %}
 
 {% block content %}
-    <h1>{{ entry.titulo }}</h1>
-    <p>
-        {{ entry.descripcion | mi_markdown }}
-    </p>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="entry">
+                <h1>{{ entry.titulo }}</h1>
+                <p>
+                    {{ entry.descripcion | mi_markdown }}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="links">
+                <h2>últimos {{ links.cantidad }} links</h2>
+                <ul>
+                    {% for link in links.links %}
+                        <li><a href="/{{ link.handle }}">{{ link.titulo }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block pie %}

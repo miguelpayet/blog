@@ -1,6 +1,20 @@
-.content {
+.content .entry {
     margin: 2% 0 3%;
     max-width: 80%;
+}
+
+.content .links {
+    margin: 2% 0 3%;
+}
+
+.content .links ul {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+}
+
+.content .links li {
+    padding: 0.15rem 0;
 }
 
 .fecha {
@@ -28,7 +42,7 @@
 .pie, .search {
     border-top: 1px solid #ddd;
     padding: 1% 0%;
-    width: 80%;
+    width: 100%;
 }
 
 .pie p {
