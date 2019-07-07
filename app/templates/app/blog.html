@@ -4,12 +4,10 @@
 {% block title %}blog{% endblock %}
 
 {% block content %}
-    <div class="contenido">
-        <h1>{{ entry.titulo }}</h1>
-        <p>
-            {{ entry.descripcion | mi_markdown }}
-        </p>
-    </div>
+    <h1>{{ entry.titulo }}</h1>
+    <p>
+        {{ entry.descripcion | mi_markdown }}
+    </p>
 {% endblock %}
 
 {% block pie %}
@@ -20,8 +18,9 @@
         <p>siguiente: <a href="/{{ siguiente.handle }}">{{ siguiente.titulo }}</a></p>
     {% endif %}
     <div class="fecha">
-        <p>
-            entrada {{ entry.identry }} - creado {{ entry.creado }} - modificado {{ entry.cambiado }}
+        <p class="text-muted">
+            entrada {{ entry.identry }} - creado {{ entry.creado }} {% if entry.cambiado %}- modificado
+            {{ entry.cambiado }} {% endif %}
         </p>
     </div>
 {% endblock %}

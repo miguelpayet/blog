@@ -1,6 +1,6 @@
-.contenido {
-    margin: 30px 0 40px;
-    max-width: 38rem;
+.content {
+    margin: 2% 0 3%;
+    max-width: 80%;
 }
 
 .fecha {
@@ -10,9 +10,14 @@
 
 .header {
     border-bottom: 1px solid #ddd;
-    font-family: courier;
+    font-family: courier, serif;
     font-size: 18pt;
     font-weight: 700;
+}
+
+.header a {
+    color: #000;
+    text-decoration: none;
 }
 
 .id {
@@ -20,10 +25,10 @@
     margin: 30px 0 20px;
 }
 
-.pie {
+.pie, .search {
     border-top: 1px solid #ddd;
-    padding-top: 10px;
-    width: 100%;
+    padding: 1% 0%;
+    width: 80%;
 }
 
 .pie p {
@@ -31,6 +36,7 @@
     padding: 0;
 }
 
+/*
 h1 {
     font-size: 24px;
     font-weight: 700;
@@ -66,3 +72,5 @@ a:hover, a:hover {
     color: #000;
     text-decoration: underline;
 }
+
+ */

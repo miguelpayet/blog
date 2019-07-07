@@ -1,0 +1,1 @@
+from .BuscadorSolr import BuscadorSolr
