@@ -22,7 +22,7 @@ def blog_page(request, slug):
 
 def agregar_links(context):
     link_list = []
-    links = Entry.objects.filter(tipo__idtipo=Tipo.LINK).order_by('-creado')[:10]
+    links = Entry.objects.filter(tipo__idtipo=Tipo.LINK).order_by('-identry')[:10]
     for link in links:
         link_list.append({'handle': link.handle, 'titulo': link.titulo})
         context['links'] = {'cantidad': 10, 'links': link_list}
