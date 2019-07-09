@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Max
 from django.db.models import Min
 
-from .Tag import Tag
 from .Tipo import Tipo
 
 
@@ -12,8 +11,8 @@ class Entry(models.Model):
     descripcion = models.TextField()
     handle = models.CharField(max_length=255)
     identry = models.AutoField(primary_key=True)
-    titulo = models.CharField(max_length=512)
     tipo = models.ForeignKey('Tipo', on_delete=models.DO_NOTHING, db_column='idtipo')
+    titulo = models.CharField(max_length=512)
 
     class Meta:
         db_table = 'entry'
@@ -27,8 +26,9 @@ class Entry(models.Model):
         return u'%s' % self.titulo
 
     def tags(self):
-        tags = Tag.objects.filter(identry=self.identry)
-        return list(tags)
+        tags = self.tagentry_set.all()
+        squares = list(map(lambda x: x.tag, tags))
+        return squares
 
     @staticmethod
     def ultimo():

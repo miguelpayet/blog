@@ -15,7 +15,7 @@ class BuscadorSolr:
         self.response_json = None
         self.rows = 500
         self.start = 0
-        self.texto = ""
+        self.texto = ''
         self.tipo_busqueda = 'edismax'
 
     def buscar(self, texto):
@@ -36,4 +36,4 @@ class BuscadorSolr:
     def validar(self):
         if 'response' in self.response:
             return self.response['response']
-        raise Exception("no hubo respuesta")
+        raise Exception('no hubo respuesta')
