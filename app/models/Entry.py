@@ -55,8 +55,3 @@ class Entry(models.Model):
         else:
             siguiente = None
         return siguiente
-
-    @staticmethod
-    def obtener_slug(slug):
-        qs = Entry.objects.filter(handle=slug)
-        return qs.first()

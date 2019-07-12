@@ -1,3 +1,5 @@
+*.jpg
+*.png
 *.log
 .DS_Store
 .idea/

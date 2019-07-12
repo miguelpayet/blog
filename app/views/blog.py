@@ -1,19 +1,28 @@
+from django.http import Http404
 from django.shortcuts import render
 
+from app.middleware import calcular_tiempo_total
+from app.middleware import medir
 from app.models.Entry import Entry
 from app.models.Tipo import Tipo
 
 
 def blog_index(request):
+    medir(request, 'vista_inicio')
     primero = Entry.ultimo()
     context = obtener_context(primero)
     agregar_links(context)
+    medir(request, 'vista_final')
     response = render(request, 'app/blog.html', context)
+    response['tiempo'] = str(calcular_tiempo_total(request))
     return response
 
 
 def blog_page(request, slug):
-    primero = Entry.obtener_slug(slug)
+    try:
+        primero = Entry.objects.get(handle=slug)
+    except Entry.DoesNotExist:
+        raise Http404("No existe entrada de blog")
     context = obtener_context(primero)
     agregar_links(context)
     response = render(request, 'app/blog.html', context)
@@ -30,9 +39,7 @@ def agregar_links(context):
 
 def obtener_context(entry):
     if entry is not None:
-        context = {'entry': entry}
+        context = {'entry': entry, 'anterior': Entry.anterior(entry), 'siguiente': Entry.siguiente(entry)}
     else:
         context = {}
-    context['anterior'] = Entry.anterior(entry)
-    context['siguiente'] = Entry.siguiente(entry)
     return context
