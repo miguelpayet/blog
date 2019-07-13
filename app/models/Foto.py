@@ -5,7 +5,6 @@ from django.db import models
 
 
 def get_file_path(instance, filename):
-    ruta = ''
     if instance.coleccion is None:
         ruta = settings.BASE_STATIC_DIR
     else:
