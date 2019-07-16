@@ -1,18 +1,7 @@
-from time import time
+import time
 
-
-def calcular_tiempo_total(request):
-    t = request.tiempos[0]
-    ti = t['tiempo']
-    tf = time()
-    tt = tf - ti
-    return tt
-
-
-def medir(request, nombre):
-    if not hasattr(request, 'tiempos'):
-        request.tiempos = []
-    request.tiempos.append({'nombre': nombre, 'tiempo': time()})
+NOMBRE_LISTA = 'tiempos'
+NOMBRE_TIEMPO = 'tiempo'
 
 
 class Medir:
@@ -21,7 +10,9 @@ class Medir:
         self.get_response = get_response
 
     def medir(self, request, nombre):
-        medir(request, nombre)
+        if not hasattr(request, NOMBRE_LISTA):
+            request.tiempos = []
+        request.tiempos.append({'nombre': nombre, NOMBRE_TIEMPO: time.time()})
         response = self.get_response(request)
         return response
 
@@ -29,10 +20,10 @@ class Medir:
 class MedirInicio(Medir):
 
     def __call__(self, request):
-        return self.medir(request, 'middleware_inicio')
+        return self.medir(request, 'medir_inicio')
 
 
 class MedirFin(Medir):
 
     def __call__(self, request):
-        return self.medir(request, 'middleware_fin')
+        return self.medir(request, 'medir_fin')
