@@ -30,6 +30,6 @@ RUN chown whiskey:www-data /app/debug.log
 WORKDIR /app/
 
 RUN python manage.py collectstatic --noinput
-CMD ["mod_wsgi-express", "start-server", "/app/blog/wsgi.py", "--user", "whiskey", "--group", "www-data"]
+CMD ["mod_wsgi-express", "start-server", "/app/blog/wsgi.py", "--user", "whiskey", "--group", "www-data", "--url-alias", "/static/", "/app/static/"]
 #CMD ["mod_wsgi-express", "start-server", "--entry-point", "/app/hello.py", "--log-level", "DEBUG", "--user", "whiskey", "--group", "www-data", "--url-alias", "/static/", "--document-root", "/app/"]
 
